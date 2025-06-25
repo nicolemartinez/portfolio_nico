@@ -1,26 +1,280 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: 'Monigue';
+  src: url('/monigue-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('/InterTight-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+  font-family: 'Inter Tight';
+  src: url('/InterTight-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter Tight', system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+  
+  .max-width-container {
+    @apply max-w-7xl mx-auto;
+  }
+  
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0.6));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-black/20 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-black/30;
+}
+
+/* Selection color */
+::selection {
+  @apply bg-black/20 text-black;
+}
+
+/* Prevent layout shift on draggable items */
+.draggable-item {
+  will-change: transform;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade in with rotation animation */
+@keyframes fadeInRotate {
+  from {
+    opacity: 0;
+    transform: translateY(30px) rotate(5deg) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+}
+
+/* Animation for visual feed */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Masonry column span */
+.column-span-all {
+  column-span: all;
+  -webkit-column-span: all;
+  -moz-column-span: all;
+}
+
+/* Rainbow Pixel Effect */
+.rainbow-pixel {
+  /* Remove gradient - let component colors show through */
+}
+
+/* SVG Animated Gradient Effect */
+@keyframes gradient-shift-1 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(calc(var(--tx-1) * 50%), calc(var(--ty-1) * 50%));
+  }
+  50% {
+    transform: translate(calc(var(--tx-2) * 50%), calc(var(--ty-2) * 50%));
+  }
+  75% {
+    transform: translate(calc(var(--tx-3) * 50%), calc(var(--ty-3) * 50%));
+  }
+}
+
+@keyframes gradient-shift-2 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(calc(var(--tx-2) * 60%), calc(var(--ty-2) * 60%));
+  }
+  50% {
+    transform: translate(calc(var(--tx-3) * 60%), calc(var(--ty-3) * 60%));
+  }
+  75% {
+    transform: translate(calc(var(--tx-4) * 60%), calc(var(--ty-4) * 60%));
+  }
+}
+
+@keyframes gradient-shift-3 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(calc(var(--tx-3) * 40%), calc(var(--ty-3) * 40%));
+  }
+  50% {
+    transform: translate(calc(var(--tx-4) * 40%), calc(var(--ty-4) * 40%));
+  }
+  75% {
+    transform: translate(calc(var(--tx-1) * 40%), calc(var(--ty-1) * 40%));
+  }
+}
+
+@keyframes gradient-shift-4 {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(calc(var(--tx-4) * 70%), calc(var(--ty-4) * 70%));
+  }
+  50% {
+    transform: translate(calc(var(--tx-1) * 70%), calc(var(--ty-1) * 70%));
+  }
+  75% {
+    transform: translate(calc(var(--tx-2) * 70%), calc(var(--ty-2) * 70%));
+  }
+}
+
+.animate-gradient-1 {
+  animation: gradient-shift-1 8s ease-in-out infinite;
+}
+
+.animate-gradient-2 {
+  animation: gradient-shift-2 10s ease-in-out infinite;
+}
+
+.animate-gradient-3 {
+  animation: gradient-shift-3 12s ease-in-out infinite;
+}
+
+.animate-gradient-4 {
+  animation: gradient-shift-4 9s ease-in-out infinite;
 }

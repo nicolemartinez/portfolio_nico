@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# sanity
+.sanity
+dist
+
+# image backups
+*.backup
+
+# editor
+.vscode
+.idea
